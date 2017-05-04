@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zt.vo.student.mapper">
+	<select id="findAll" resultType="com.biz.po.Student">
+		select * from student
+	</select>
+	<select id="findOnePage" parameterType="int"  resultType="com.biz.po.Student">
+		select * from student order by avgscore desc limit #{start},10;
+	</select>
+	<select id="findStudentAmont" resultType="int">
+		select count(*) from student
+	</select>
+	<select id="findStudentById" parameterType="java.lang.String" resultType="com.biz.po.Student">
+		select * from student where id=#{id}
+	</select>
+	<insert id="saveStudent" parameterType="com.biz.po.Student">
+		insert into student values (#{id},#{name},#{birthday},#{avgscore},#{description})
+	</insert>
+	<delete id="deleteStudentById" parameterType="java.lang.String">
+		delete from student where id=#{id}
+	</delete>
+	<update id="updateStudent" parameterType="com.biz.po.Student">
+		update student set name=#{name},birthday=#{birthday},avgscore=#{avgscore},description=#{description} where id=#{id}
+	</update>
+</mapper>
